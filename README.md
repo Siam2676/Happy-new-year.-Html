@@ -1,1 +1,309 @@
 # Happy-new-year.-Html
+<!DOCTYPE html>
+
+<html lang="bn">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Happy New Year My Love ❤️</title>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Hind+Siliguri:wght@400;600&display=swap" rel="stylesheet">
+
+
+<style>
+
+    body {
+
+        margin: 0;
+
+        height: 100vh;
+
+        background: radial-gradient(circle, #fff0f5, #ffe4ec);
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        font-family: 'Poppins', 'Hind Siliguri', sans-serif;
+
+        overflow: hidden;
+
+    }
+
+
+    /* Floating Hearts Animation */
+
+    .heart {
+
+        position: absolute;
+
+        color: rgba(255, 77, 141, 0.3);
+
+        font-size: 20px;
+
+        animation: float 5s linear infinite;
+
+        z-index: -1;
+
+    }
+
+
+    @keyframes float {
+
+        0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+
+        100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+
+    }
+
+
+    .container {
+
+        text-align: center;
+
+        z-index: 10;
+
+        width: 100%;
+
+    }
+
+
+    .card {
+
+        background: rgba(255, 255, 255, 0.9);
+
+        backdrop-filter: blur(5px);
+
+        width: 85%;
+
+        max-width: 400px;
+
+        margin: 0 auto;
+
+        min-height: 250px;
+
+        padding: 40px 20px;
+
+        border-radius: 30px;
+
+        box-shadow: 0 20px 50px rgba(214, 51, 132, 0.2);
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        font-size: 22px;
+
+        font-weight: 600;
+
+        color: #d63384;
+
+        line-height: 1.5;
+
+        transition: all 0.5s ease-in-out;
+
+        border: 2px solid #ffb6c1;
+
+    }
+
+
+    button {
+
+        margin-top: 30px;
+
+        padding: 15px 40px;
+
+        border: none;
+
+        border-radius: 50px;
+
+        background: linear-gradient(45deg, #ff4d8d, #ff85a2);
+
+        color: white;
+
+        font-size: 18px;
+
+        font-weight: 600;
+
+        cursor: pointer;
+
+        box-shadow: 0 8px 20px rgba(255, 77, 141, 0.4);
+
+        transition: transform 0.2s;
+
+    }
+
+
+    button:active { transform: scale(0.95); }
+
+    button:disabled { background: #ccc; box-shadow: none; cursor: default; }
+
+
+    .footer {
+
+        margin-top: 20px;
+
+        font-size: 14px;
+
+        color: #b36b8a;
+
+        font-weight: 400;
+
+    }
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+    <div class="card" id="card">লোড হচ্ছে...</div>
+
+    <button id="btn">Next ➜</button>
+
+    <div class="footer" id="footer">ছোঁয়া দাও বা ক্লিক করো ❤️</div>
+
+</div>
+
+
+<script>
+
+const messages = [
+
+    "জানু, তোমার জন্য একটা ছোট্ট সারপ্রাইজ! ❤️",
+
+    "গত বছরটা তোমার সাথে কাটানো আমার জীবনের শ্রেষ্ঠ সময় ছিল। 🌟",
+
+    "তুমি আমার জীবনের সবচেয়ে সুন্দর এবং দামি উপহার। 🎁",
+
+    "নতুন বছরে আমাদের ভালোবাসা আরও গভীর হোক। 🥂",
+
+    "আর সবশেষে তোমার জন্য আমার একটা ছোট্ট স্বীকারোক্তি...",
+
+];
+
+
+const finalMessage = `
+
+হ্যাপি নিউ ইয়ার প্রিয়! ❤️<br><br>
+
+যতদিন শ্বাস থাকবে,<br>
+
+আমি এভাবেই তোমার পাশে থাকবো।<br>
+
+I Love You! 💍
+
+`;
+
+
+let index = 0;
+
+const card = document.getElementById("card");
+
+const btn = document.getElementById("btn");
+
+const footer = document.getElementById("footer");
+
+
+card.innerHTML = messages[index];
+
+
+// Create background hearts
+
+function createHeart() {
+
+    const heart = document.createElement('div');
+
+    heart.classList.add('heart');
+
+    heart.innerHTML = '❤️';
+
+    heart.style.left = Math.random() * 100 + 'vw';
+
+    heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => { heart.remove(); }, 5000);
+
+}
+
+setInterval(createHeart, 400);
+
+
+btn.onclick = () => {
+
+    card.style.opacity = 0;
+
+    card.style.transform = "scale(0.9)";
+
+    
+
+    setTimeout(() => {
+
+        index++;
+
+        if(index < messages.length){
+
+            card.innerHTML = messages[index];
+
+        } else {
+
+            card.innerHTML = finalMessage;
+
+            card.style.color = "#ff2f92";
+
+            card.style.borderColor = "#ff2f92";
+
+            footer.innerText = "Forever & Always ❤️";
+
+            btn.innerHTML = "Happy New Year! 🎉";
+
+            btn.disabled = true;
+
+            pulse();
+
+        }
+
+        card.style.opacity = 1;
+
+        card.style.transform = "scale(1)";
+
+    }, 500);
+
+};
+
+
+function pulse(){
+
+    setInterval(() => {
+
+        card.style.boxShadow = card.style.boxShadow.includes('50px') 
+
+            ? "0 20px 80px rgba(255, 47, 146, 0.5)" 
+
+            : "0 20px 50px rgba(214, 51, 132, 0.2)";
+
+    }, 700);
+
+}
+
+</script>
+
+
+</body>
+
+</html>
